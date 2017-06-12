@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="index-main">
+    <ol class="breadcrumb">
+        <li><a href="/">Catalog</a></li>
+        <li><a href="/Categories/">Categories</a></li>
+        <li><a href="/Category/{{ category.name }}/">{{ category.name }}</a></li>
+        <li class="active">{{ item.name }}</li>
+    </ol>
+	<section id="items">
+        <!-- TODO: Add images -->
+    	<article class="col-xs-12 well catalog">
+    		<span id="title">{{ item.name }}</span>
+            <span id="desc"> / ({{ category.name }})</span>
+    		<p>
+    			{{ item.description }}
+    		</p>
+            {% if user is not none %}
+                {% if item.creator == session['username'] %}
+                    <a href="edit">Edit </a>
+                    |
+                    <a href="delete"> Delete </a>
+                {% endif %}
+            {% endif %}
+    	</article>
+    </section>
+</main>
+{% endblock %}

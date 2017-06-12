@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="index-main" id="index">
+	<section id="categories">
+		<div class="dropdown">
+  			<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    			Categories
+    			<span class="caret"></span>
+ 			</button>
+  			<ul class="dropdown-menu">
+  				{% for cat in categories %}
+    			<li><a href="/Category/{{cat.name}}">{{ cat.name }}</a></li>
+    			{% endfor %}
+    			<li role="separator" class="divider"></li>
+    			<li><a href="/categories/">See More...</a></li>
+  			</ul>
+		</div>
+		<aside class="cat-nav">
+		    <h4> Categories </h4>
+			<ul>
+  				{% for cat in categories %}
+    			<li><a href="/Category/{{cat.name}}">{{ cat.name }}</a></li>
+    			{% endfor %}
+    			<li role="separator" class="divider"></li>
+    			<li><a href="/categories/">See More...</a></li>
+  			</ul>
+		</aside>
+	</section>
+	<section id="items">
+    	{% for item in items %}
+    	<a href="/Category/{{db.query(Category.name).filter_by(id=item.category_id).all()[0][0]}}/Item/{{item.name}}">
+    		<article class="col-xs-12 well index">
+    			<span id="title">{{ item.name }}</span>
+    			<span id="desc"> / 
+    				({{ db.query(Category.name).filter_by(id=item.category_id).all()[0][0] }})
+    			</span>
+    			<p>
+    				{{ item.description }}
+    			</p>
+    		</article>
+    	</a>
+    	{% endfor %}
+    </section>
+</main>
+{% endblock %}

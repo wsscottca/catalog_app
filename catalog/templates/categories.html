@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="index-main">
+
+    <ol class="breadcrumb">
+        <li><a href="/">Catalog</a></li>
+        <li class="active">Categories</li>
+    </ol>
+
+	<section id="categories">
+		{% for cat in categories %}
+            {% if cat.parent_id is none %}
+                <a href="/Category/{{ cat.name }}">
+        	       <article class="col-xs-12 well catalog">
+
+                        <span class="row" id="title">{{ cat.name }}</span>
+                        <span id="desc">
+                            {% if cat.description is not none %}
+                                {{ cat.description }}<br>
+                            {% endif %}
+                            <br>
+                        </span>
+
+                        {% for item in db.query(Item).filter_by(category_id=cat.id).limit(2).all() %}
+                            <a href="/Category/{{ cat.name }}/Item/{{ item.name }}">
+
+                            <article class="col-xs-12 well catalog" id="inner-well">
+                                <span id="title">{{ item.name }}</span>
+                                <p>{{ item.description }}</p>
+                            </article>
+
+                        {% endfor %}
+                        
+                        {% for cat2 in db.query(Category).filter_by(parent_id=cat.id).limit(2).all() %}
+                            <article class="col-xs-12 well catalog" id="inner-well">
+
+                                <span id="title">{{ cat2.name }}</span>
+                                {% if cat2.description is not none %}
+                                    <p>{{ cat2.description }}</p>
+                                {% endif %}
+
+                            </article>
+                        {% endfor %}
+
+                    </article>
+                </a>
+            {% endif %}
+    	{% endfor %}
+
+    	{% if user is not none %}
+        	<span class="row"><a href="/Category/new">Add new category...</a></span>
+    	{% endif %}
+	</section>
+
+</main>
+{% endblock %}

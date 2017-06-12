@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="index-main">
+    <h2 class="bold">{{ category.name }}</h2>
+    {% if user is not none %}
+        {% if category.creator == session['username'] %}
+            <a href="edit">Edit </a>
+            |
+            <a href="delete"> Delete </a>
+            <br><br>
+        {% endif %}
+    {% endif %}
+    <ol class="breadcrumb">
+        <li><a href="/">Catalog</a></li>
+        <li><a href="/Categories/">Categories</a></li>
+        <li class="active">{{ category.name }}</li>
+    </ol>
+	<section id="categories">
+    <h3> Categories </h3>
+		{% for cat in categories %}
+            <a href="/Category/{{ cat.name }}">
+        	   <article class="col-xs-12 well catalog">
+                    <span class="row" id="title">{{ cat.name }}</span>
+                    <span id="desc">
+                        {% if cat.description is not none %}
+                            {{ cat.description }}<br>
+                        {% endif %}
+                        <br>
+                    </span>
+                    {% for item in db.query(Item).filter_by(category_id=cat.id).limit(4).all() %}
+                        <a href="/Category/{{ cat.name }}/Item/{{ item.name }}">
+                            <article class="col-xs-12 well catalog" id="inner-well">
+                                <span id="title">{{ item.name }}</span>
+                                <p>{{ item.description }}</p>
+                            </article>
+                        </a>
+                    {% endfor %}
+                </article>
+            </a>
+    	{% endfor %}
+	</section>
+	<section id="items">
+    <h3> Items </h3>
+    	{% for item in items %}
+            <a href="/Category/{{ category.name }}/Item/{{ item.name }}">
+    		  <article class="col-xs-12 well catalog">
+    			<span id="title">{{ item.name }}</span>
+    			<p>
+    				{{ item.description }}
+    			</p>
+    		  </article>
+            </a>
+    	{% endfor %}
+    </section>
+    {% if user is not none %}
+        <span class="row"><a href="Item/new">Add new item...</a></span>
+        <a href="/Category/new">Add new category...</a>
+    {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="col-12-sm well newCategory">
+	<h3>Edit {{ item.name }}</h3>
+	<form action="#" method = "post" class="well" id="inner-well">
+		<div class="form-group">
+			<label for="name">Name:</label>
+			<input type ="text" class="form-control" maxlength="100" name="name"
+			 value="{{ item.name }}">
+			<br>
+			<label for="description">Description:</label>
+			<input type ="text" class="form-control" maxlength="250" name="description"
+			 value="{{ item.description }}">
+			<br><br><br>
+			<button type="submit" class="btn btn-default" id="submit" type="submit">
+			<span class="glyphicon glyphicon-check"></span> Edit</button>
+		</div>
+	</form>
+</article>
+{% endblock %}

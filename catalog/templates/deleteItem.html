@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="index-main">
+	<article class="col-12-sm well catalog">
+		<h3> Are you sure you want to delete {{ item.name }}? </h3>
+		<br>
+		<form action="#" method = 'post'>
+		<button type="submit" class="btn btn-default delete" id="submit" type="submit">
+		<span class="glyphicon glyphicon-trash"></span> Delete</button>
+		</form>
+
+		<a href ="{{url_for('showCategory', category_name=category_name)}}">
+			<button class="btn btn-default cancel">
+			<span class="glyphicon glyphicon-remove"></span> Cancel</button>
+		</a>
+		<br><br>
+	</article>
+</main>
+{% endblock %}

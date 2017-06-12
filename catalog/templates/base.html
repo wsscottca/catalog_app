@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout.css') }}" rel="stylesheet">
+
+    <title>Catalog App</title>
+    {% endblock %}
+</head>
+<body>
+    <header class="jumbotron container-fluid">
+        <h1> Catalog App </h1>
+        {% if request.path!="/login/" %}
+            {% if user is none %}
+                <a href="{{ url_for('showLogin') }}">
+                    <button type="button" class="btn btn-xs btn-default btn-login">Login</button>
+                </a>
+            {% else %}
+                <a href="{{ url_for('gdisconnect') }}">
+                    <button type="button" class="btn btn-xs btn-default btn-login">Logout</button>
+                </a>
+            {% endif %}
+        {% endif %}
+    </header>
+    {% block content %}
+    {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
+    <script src="{{ url_for('static', filename='js/project.js') }}"></script>
+</body>
+</html>
