@@ -1,6 +1,6 @@
-#Item Catalog app
+**Item Catalog app**
 
-##Setup -
+**Setup -**
 
  1. Install virtual machine from [here](https://github.com/udacity/fullstack-nanodegree-vm)
  2. Clone the catalog project into your shared vagrant folder
@@ -16,7 +16,7 @@
  7. Setup the database using `python database_setup.py`
  8. Fill the database with mock data using `python starter_content.py`
 
-##Run the app
+**Run the app**
 
   To run the app enter the catalog directory and run `python project.py`,
     app should start on http://localhost:5000/ connect using your browser.
