@@ -24,7 +24,7 @@ conn = engine.connect()
 
 
 # Sports Category
-category1 = Category(name="Sports")
+category1 = Category(name="Sports", creator="admin")
 
 session.add(category1)
 session.commit()
